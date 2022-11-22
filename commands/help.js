@@ -12,10 +12,11 @@ module.exports = {
       }
     });
     const embed = new EmbedBuilder()
-      .setTitle("List of commands")
+      .setTitle("List of commands 🍁")
       .setDescription("What can I do to help you?")
       .addFields(commands)
-      .setColor(0xFFA500);
+      .setColor(0xFFA500)
+      .setFooter({ text: "Kaedehara Kazuha", iconURL: interaction.client.user.displayAvatarURL() });
     interaction.reply({ 
       embeds: [embed] 
     });

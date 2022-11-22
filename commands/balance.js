@@ -6,7 +6,11 @@ module.exports = {
     .setName("balance")
     .setDescription("Get the amount of mora you currently have."),
   async execute(interaction) {
-    let user = await Users.findOne({ where: { userId: interaction.user.id }});
+    let user = await Users.findOne({
+      where: {
+        userId: interaction.user.id
+      }
+    });
     // Create new user when user doesn't exists yet
     if (!user) {
       user = await Users.create({ 
@@ -16,8 +20,8 @@ module.exports = {
     }
     // Reply with embed
     const embed = new EmbedBuilder()
-      .setTitle("Your balance")
-      .setDescription(`You currently have ${user.balance} mora 🪙`)
+      .setTitle("Your balance ✨")
+      .setDescription(`You currently have ${user.balance} Mora 🪙.`)
       .setColor(0xFFA500)
     interaction.reply({ 
       embeds: [embed] 

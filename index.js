@@ -1,8 +1,8 @@
-const { Client, GatewayIntentBits, Collection } = require("discord.js");
-const dotenv = require("dotenv");
-const path = require("path");
-const fs = require("fs");
-const Sequelize = require("sequelize");
+const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const dotenv = require('dotenv');
+const path = require('path');
+const fs = require('fs');
+const Sequelize = require('sequelize');
 
 // Configure env variables
 dotenv.config();
@@ -19,8 +19,8 @@ const client = new Client({
 
 // Add commands
 client.commands = new Collection();
-const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
@@ -29,8 +29,8 @@ for (const file of commandFiles) {
 }
 
 // Add events
-const eventsPath = path.join(__dirname, "events");
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith(".js"));
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
   const filePath = path.join(eventsPath, file);
@@ -44,7 +44,7 @@ for (const file of eventFiles) {
 }
 
 // Handle commands
-client.on("interactionCreate", async (interaction) => {
+client.on('interactionCreate', async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const command = interaction.client.commands.get(interaction.commandName);
@@ -57,37 +57,44 @@ client.on("interactionCreate", async (interaction) => {
   catch (error) {
     console.error(error);
     await interaction.reply({
-      content: "There was an error while executing this command!",
+      content: 'There was an error while executing this command!',
       ephemeral: true,
     });
   }
 });
 
 // Setup databases
-const sequelize = new Sequelize("database", "username", "password", {
-  host: "localhost",
-  dialect: "sqlite",
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'sqlite',
   logging: false,
-  storage: "database.sqlite"
+  storage: 'database.sqlite',
 });
 
-const Shop = require("./models/Shop.js")(sequelize, Sequelize.DataTypes);
-const Users = require("./models/Users.js")(sequelize, Sequelize.DataTypes);
-const UsersShop = require ("./models/UsersShop.js")(sequelize, Sequelize.DataTypes);
+const Shop = require('./models/Shop.js')(sequelize, Sequelize.DataTypes);
+// eslint-disable-next-line  no-unused-vars
+const Users = require('./models/Users.js')(sequelize, Sequelize.DataTypes);
+// eslint-disable-next-line  no-unused-vars
+const UsersShop = require ('./models/UsersShop.js')(sequelize, Sequelize.DataTypes);
 
-const force = process.argv.includes("--force") || process.argv.includes("-f");
+const force = process.argv.includes('--force') || process.argv.includes('-f');
 
 sequelize.sync({ force }).then(async () => {
-	const shop = [
-		Shop.upsert({ name: "Tea", cost: 1 }),
-		Shop.upsert({ name: "Coffee", cost: 2 }),
-		Shop.upsert({ name: "Cake", cost: 5 }),
-	];
+  const shop = [
+    Shop.upsert({ name: 'Maple Leaf', cost: 15 }),
+    Shop.upsert({ name: 'Tea', cost: 50 }),
+    Shop.upsert({ name: 'Fish', cost: 25 }),
+    Shop.upsert({ name: 'Kazuha\'s bath water', cost: 69 }),
+    Shop.upsert({
+      name: 'Rights to Kazuha Bot',
+      cost: 6969696969696969696969696969696969696969696969696969696969696969696969, // eslint-disable-line no-loss-of-precision
+    }),
+  ];
 
-	await Promise.all(shop);
-	console.log("Database is synced");
+  await Promise.all(shop);
+  console.log('Database is synced');
 
-	sequelize.close();
+  sequelize.close();
 }).catch(console.error);
 
 // Log in to Discord with token
