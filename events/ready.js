@@ -1,7 +1,7 @@
-import { EmbedBuilder } from "@discordjs/builders";
-import { CronJob } from "cron";
+const { EmbedBuilder } = require("@discordjs/builders");
+const { CronJob } = require("cron");
 
-export default {
+module.exports = {
   name: "ready",
   once: true,
   execute(client) {
@@ -10,8 +10,8 @@ export default {
       status: "online" 
     });
     // Start sending daily scheduled messages
-    const dailyReminder = new CronJob("00 33 16 * * *", () => {
-      const channel = client.channels.cache.find(channel => channel.name === "general");
+    const dailyReminder = new CronJob("00 00 00 * * *", () => {
+      const channel = client.channels.cache.find(channel => channel.name === "test-kazuha-bot");
       console.log("Daily reminders sent!");
       const embed = new EmbedBuilder()
         .setTitle("Rise and shine...")

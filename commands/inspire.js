@@ -1,7 +1,7 @@
-import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
-import axios from "axios";
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const axios = require("axios");
 
-export default {
+module.exports = {
   data: new SlashCommandBuilder()
     .setName("inspire")
     .setDescription("Find inspirations and enlightenments in Kazuha's words <3"),
