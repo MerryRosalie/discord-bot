@@ -1,21 +1,21 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { Users } = require("../db_objects.js");
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { Users } = require('../db_objects.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("work")
-    .setDescription("Help the jobless Kazuha earn some money 😔"),
+    .setName('work')
+    .setDescription('Help the jobless Kazuha earn some money 😔'),
   async execute(interaction) {
     let user = await Users.findOne({
       where: {
-        userId: interaction.user.id
-      }
+        userId: interaction.user.id,
+      },
     });
     // Create new user when user doesn't exists yet
     if (!user) {
-      user = await Users.create({ 
+      user = await Users.create({
         userId: interaction.user.id,
-        balance: 0
+        balance: 0,
       });
     }
     // Return early when it hasn't been 1 hour since the user worked
@@ -35,18 +35,18 @@ module.exports = {
     user.save();
     // Reply with embed
     const embed = new EmbedBuilder()
-      .setTitle("Thanks for helping me out!")
-      .setDescription("Here is the share that I promised you.")
+      .setTitle('Thanks for helping me out!')
+      .setDescription('Here is the share that I promised you.')
       .addFields([{
         name: `You just gained ${amount} Mora 🪙`,
-        value: `Your balance is now ${user.balance} Mora 🪙.`
+        value: `Your balance is now ${user.balance} Mora 🪙.`,
       }])
-      .setColor(0xFFA500)
-    interaction.reply({ 
-      embeds: [embed] 
+      .setColor(0xFFA500);
+    interaction.reply({
+      embeds: [embed],
     });
     // Set time to Date.now()
     user.previousWorkTime = Date.now();
     user.save();
   },
-}
+};
