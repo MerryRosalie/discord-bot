@@ -13,12 +13,12 @@ dotenv.config();
 
 // Create a new client instance
 const client = new Client({
-	intents: [
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.GuildMembers,
-	],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+  ],
 });
 
 // Set up paths
@@ -45,13 +45,14 @@ for (const file of eventFiles) {
   const { default: event } = await import(filePath);
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
-  } else {
+  }
+  else {
     client.on(event.name, (...args) => event.execute(...args));
   }
 }
 
 // Handle commands
-client.on('interactionCreate', async interaction => {
+client.on('interactionCreate', async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const command = interaction.client.commands.get(interaction.commandName);
