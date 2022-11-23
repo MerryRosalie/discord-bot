@@ -13,7 +13,7 @@ module.exports = {
     });
     // Start sending daily scheduled messages
     const dailyReminder = new CronJob('00 00 00 * * *', async () => {
-      const channel = await client.channels.find(channel => channel.name === 'test-kazuha-bot');
+      const channel = await client.channels.cache.find(channelItem => channelItem.name === 'test-kazuha-bot');
       const winnerEntry = await Lottery.findOne({ order: [Sequelize.fn('RANDOM')] });
       let lotteryField = {
         name: 'Today\'s lottery winner is...',
