@@ -23,7 +23,7 @@ module.exports = {
         userId: interaction.user.id,
       },
     });
-    const todayMidnight = new Date().setHours(0, 0, 0);
+    const todayMidnight = new Date().setHours(24, 0, 0);
     const timeDiff = Math.abs(todayMidnight - Date.now());
     const hours = Math.floor(timeDiff / 1000 / 3600);
     const minutes = Math.ceil((timeDiff / 1000 % 3600) / 60) % 60;
