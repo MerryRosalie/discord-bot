@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint **.js",
+    "lint": "eslint **.js events/**.js commands/**.js models/**.js",
     "lint-fix": "eslint --fix **.js events/**.js commands/**.js models/**.js",
     "start": "node deploy-commands.js | node ."
   },

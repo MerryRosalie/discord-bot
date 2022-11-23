@@ -76,6 +76,8 @@ const Shop = require('./models/Shop.js')(sequelize, Sequelize.DataTypes);
 const Users = require('./models/Users.js')(sequelize, Sequelize.DataTypes);
 // eslint-disable-next-line  no-unused-vars
 const UsersShop = require ('./models/UsersShop.js')(sequelize, Sequelize.DataTypes);
+// eslint-disable-next-line  no-unused-vars
+const Lottery = require('./models/Lottery.js')(sequelize, Sequelize.DataTypes);
 
 const force = process.argv.includes('--force') || process.argv.includes('-f');
 

@@ -9,11 +9,17 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 
 const Shop = require('./models/Shop.js')(sequelize, Sequelize.DataTypes);
 const Users = require('./models/Users.js')(sequelize, Sequelize.DataTypes);
-const UsersShop = require ('./models/UsersShop.js')(sequelize, Sequelize.DataTypes);
+const UsersShop = require('./models/UsersShop.js')(sequelize, Sequelize.DataTypes);
+const Lottery = require('./models/Lottery.js')(sequelize, Sequelize.DataTypes);
 
 UsersShop.belongsTo(Shop, {
   foreignKey: 'itemId',
   as: 'item',
+});
+
+Lottery.belongsTo(Users, {
+  foreignKey: 'userId',
+  as: 'user',
 });
 
 Reflect.defineProperty(Users.prototype, 'addItem', {
@@ -47,4 +53,13 @@ Reflect.defineProperty(Users.prototype, 'getItems', {
   },
 });
 
-module.exports = { Users, Shop, UsersShop };
+Reflect.defineProperty(Lottery.prototype, 'getUser', {
+  value: function getUser() {
+    return Lottery.findOne({
+      where: { userId: this.userId },
+      include: ['user'],
+    });
+  },
+});
+
+module.exports = { Users, Shop, UsersShop, Lottery };
