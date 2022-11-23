@@ -33,7 +33,7 @@ module.exports = {
       Lottery.sync({ force: true });
       // Send embed
       const embed = new EmbedBuilder()
-        .setTitle('Rise and shine...')
+        .setTitle('It\'s a new day...')
         .setDescription('The birdsong at daybreak is nature\'s gift to us. Let us go. Our journey begins anew.')
         .addFields({
           name: 'Genshin daily check-in',
