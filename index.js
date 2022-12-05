@@ -64,7 +64,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // Setup databases
-const sequelize = new Sequelize(process.env.DATABASE_URI, {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   logging: false,
   dialectOptions: {
     ssl: {
