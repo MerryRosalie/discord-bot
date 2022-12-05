@@ -64,7 +64,15 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // Setup databases
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const sequelize = new Sequelize(process.env.DATABASE_URI, {
+  logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
 
 const Shop = require('./models/Shop.js')(sequelize, Sequelize.DataTypes);
 // eslint-disable-next-line  no-unused-vars
@@ -82,10 +90,6 @@ sequelize.sync({ force }).then(async () => {
     Shop.upsert({ name: 'Tea', cost: 50 }),
     Shop.upsert({ name: 'Fish', cost: 25 }),
     Shop.upsert({ name: 'Kazuha\'s bath water', cost: 69 }),
-    Shop.upsert({
-      name: 'Rights to Kazuha Bot',
-      cost: 6969696969696969696969696969696969696969696969696969696969696969696969, // eslint-disable-line no-loss-of-precision
-    }),
   ];
 
   await Promise.all(shop);

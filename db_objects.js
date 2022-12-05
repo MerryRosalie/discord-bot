@@ -1,6 +1,14 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const sequelize = new Sequelize(process.env.DATABASE_URI, {
+  logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
 
 const Shop = require('./models/Shop.js')(sequelize, Sequelize.DataTypes);
 const Users = require('./models/Users.js')(sequelize, Sequelize.DataTypes);

@@ -42,7 +42,7 @@ module.exports = {
         .setColor(0xFFA500)
         .setAuthor({ name: 'Kaedehara Kazuha', iconURL: client.user.displayAvatarURL() })
         .setTimestamp();
-      client.channels.cache.filter(channelItem => channelItem.name === 'test-kazuha-bot').map(() => {
+      client.channels.cache.filter(channelItem => channelItem.name === 'test-kazuha-bot').map((channel) => {
         channel.send({ embeds: [embed] });
       });
       console.log('Daily reminders sent!');
