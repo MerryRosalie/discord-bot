@@ -31,7 +31,7 @@ module.exports = {
     // Add a random amount of money from 100 to 200
     const amount = Math.floor(Math.random() * (200 - 100 + 1) + 100);
     // Add balance
-    user.balance += Number(amount);
+    user.balance += amount;
     user.save();
     // Reply with embed
     const embed = new EmbedBuilder()

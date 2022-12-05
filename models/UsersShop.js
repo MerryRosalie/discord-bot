@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('users_shop', {
     userId: DataTypes.STRING,
-    itemId: DataTypes.BIGINT,
+    itemId: DataTypes.INTEGER,
     amount: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.INTEGER,
       allowNull: false,
       'default': 0,
     },
