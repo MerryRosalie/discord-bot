@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('shop', {
     itemId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
     },
     cost: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
   }, {

@@ -5,12 +5,12 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     },
     balance: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       defaultValue: 0,
       allowNull: false,
     },
     previousWorkTime: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: true,
     },
   }, {
