@@ -5,11 +5,11 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('leaderboard')
     .setDescription('Display the leaderboard sorted by who has the most coins.'),
-  async execute(interaction) {
+  async execute(client, interaction) {
     const users = await Users.findAll();
     let rank = 0;
     const allUsers = users.map(async(user) => {
-      const userTarget = await interaction.client.users.fetch(user.userId);
+      const userTarget = await client.users.fetch(user.userId);
       return {
         tag: userTarget.tag,
         balance: user.balance,
@@ -31,7 +31,7 @@ module.exports = {
         value: '\u200b',
       }] : userLeaderboard))
       .setColor(0xFFA500)
-      .setFooter({ text: 'Kaedehara Kazuha', iconURL: interaction.client.user.displayAvatarURL() });
+      .setFooter({ text: 'Kaedehara Kazuha', iconURL: client.user.displayAvatarURL() });
     interaction.reply({
       embeds: [embed],
     });
