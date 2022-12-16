@@ -10,8 +10,10 @@ module.exports = {
     let rank = 0;
     const allUsers = users.map(async (user) => {
       const userTarget = await interaction.client.users.fetch(user.userId);
+      console.log(userTarget);
+      console.log(user);
       return {
-        tag: `${userTarget.username}${userTarget.discriminator}`,
+        tag: userTarget.tag,
         balance: user.balance,
       };
     });
