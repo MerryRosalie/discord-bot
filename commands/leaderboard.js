@@ -8,19 +8,17 @@ module.exports = {
   async execute(interaction) {
     const users = await Users.findAll();
     let rank = 0;
-    const allUsers = users.map(async (user) => {
+    const allUsers = await Promise.all(users.map(async (user) => {
       const userTarget = await interaction.client.users.fetch(user.userId);
       return {
         tag: userTarget.tag,
         balance: user.balance,
       };
-    });
-    console.log(allUsers);
+    }));
     const userLeaderboard = allUsers.sort((user1, user2) => {
       return user2.balance - user1.balance;
     }).map((user) => {
       rank++;
-      console.log(user);
       return {
         name: `${rank} - ${user.tag}`,
         value: `${user.balance} Mora 🪙`,
