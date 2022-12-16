@@ -10,17 +10,17 @@ module.exports = {
     let rank = 0;
     const allUsers = users.map(async (user) => {
       const userTarget = await interaction.client.users.fetch(user.userId);
-      console.log(userTarget);
-      console.log(user);
       return {
         tag: userTarget.tag,
         balance: user.balance,
       };
     });
+    console.log(allUsers);
     const userLeaderboard = allUsers.sort((user1, user2) => {
       return user2.balance - user1.balance;
     }).map((user) => {
       rank++;
+      console.log(user);
       return {
         name: `${rank} - ${user.tag}`,
         value: `${user.balance} Mora 🪙`,
