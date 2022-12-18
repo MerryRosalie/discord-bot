@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BIGINT,
       allowNull: true,
     },
+    previousRpsTime: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+    },
   }, {
     timestamps: false,
   });
