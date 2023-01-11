@@ -105,3 +105,6 @@ dist
 
 # Sqlite database
 *.sqlite
+
+# package-lock.json
+package-lock.json
